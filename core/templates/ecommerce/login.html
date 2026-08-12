@@ -1,0 +1,51 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | JewelLens</title>
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}" />
+  </head>
+  <body class="auth-body">
+    <main class="auth-shell">
+      <section class="auth-visual" aria-label="JewelLens welcome">
+        <a class="auth-brand" href="{% url 'ecommerce:home' %}">
+          <img src="{% static 'assets/jewellens-logo.svg' %}" alt="JewelLens logo" />
+          <span>JewelLens</span>
+        </a>
+
+        <div>
+          <p class="eyebrow">Welcome back</p>
+          <h1>Find your shine again.</h1>
+          <p>Login to continue exploring handpicked jewellery, saved styles, and your account details.</p>
+        </div>
+      </section>
+
+      <section class="auth-card" aria-labelledby="login-title">
+        <p class="eyebrow">Login</p>
+        <h2 id="login-title">Sign in to your account</h2>
+
+        {% if error_message %}
+          <p class="form-alert">{{ error_message }}</p>
+        {% endif %}
+
+        <form class="auth-form" method="POST">
+          {% csrf_token %}
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" autocomplete="username" required />
+
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" autocomplete="current-password" required />
+
+          <button class="primary-button" type="submit">Login</button>
+        </form>
+
+        <p class="auth-switch">
+          Do not have an account?
+          <a href="{% url 'ecommerce:register' %}">Register here</a>
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

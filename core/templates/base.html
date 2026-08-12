@@ -1,0 +1,95 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}JewelLens{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a
+        class="brand"
+        href="{% url 'ecommerce:home' %}"
+        aria-label="JewelLens home"
+      >
+        <img
+          class="brand-logo"
+          src="{% static 'assets/jewellens-logo.svg' %}"
+          alt="JewelLens logo"
+        />
+        <span class="brand-name">JewelLens</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a class="nav-link{% if request.resolver_match.url_name == 'home' %} active{% endif %}" href="{% url 'ecommerce:home' %}">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="m3 11 9-8 9 8" />
+            <path d="M5 10v10h5v-6h4v6h5V10" />
+          </svg>
+          <span>Home</span>
+        </a>
+        <a class="nav-link{% if request.resolver_match.url_name == 'collection' %} active{% endif %}" href="{% url 'ecommerce:collection' %}">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M6 3h12l4 6-10 12L2 9z" />
+            <path d="m6 3 6 18 6-18" />
+            <path d="M2 9h20" />
+          </svg>
+          <span>Collections</span>
+        </a>
+        <a class="nav-link{% if request.resolver_match.url_name == 'about' %} active{% endif %}" href="{% url 'ecommerce:about' %}">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M20 21a8 8 0 0 0-16 0" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          <span>About</span>
+        </a>
+        <a class="nav-link{% if request.resolver_match.url_name == 'contact' %} active{% endif %}" href="{% url 'ecommerce:contact' %}">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M4 6h16v12H4z" />
+            <path d="m4 7 8 6 8-6" />
+          </svg>
+          <span>Contact</span>
+        </a>
+      </nav>
+
+      <div class="header-actions" aria-label="Shop actions">
+        <a class="icon-link" href="#" aria-label="Wishlist">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path
+              d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"
+            />
+          </svg>
+        </a>
+        <a class="icon-link" href="#" aria-label="Shopping cart">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <circle cx="9" cy="20" r="1.5" />
+            <circle cx="18" cy="20" r="1.5" />
+            <path d="M2 3h3l3 12h11l2-8H7" />
+          </svg>
+        </a>
+        <a class="icon-link" href="#" aria-label="Orders">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="m12 2 8 4v9l-8 5-8-5V6z" />
+            <path d="m4 6 8 4 8-4" />
+            <path d="M12 10v10" />
+            <path d="m16 12 3 2-3 2" />
+          </svg>
+        </a>
+        <a class="icon-link{% if request.resolver_match.url_name == 'profile' %} active{% endif %}" href="{% url 'ecommerce:profile' %}" aria-label="Account profile">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M20 21a8 8 0 0 0-16 0" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <main class="page-content">{% block content %}{% endblock %}</main>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 JewelLens. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

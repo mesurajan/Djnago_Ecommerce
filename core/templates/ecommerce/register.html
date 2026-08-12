@@ -1,0 +1,57 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | JewelLens</title>
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}" />
+  </head>
+  <body class="auth-body">
+    <main class="auth-shell">
+      <section class="auth-visual" aria-label="JewelLens registration">
+        <a class="auth-brand" href="{% url 'ecommerce:home' %}">
+          <img src="{% static 'assets/jewellens-logo.svg' %}" alt="JewelLens logo" />
+          <span>JewelLens</span>
+        </a>
+
+        <div>
+          <p class="eyebrow">Create account</p>
+          <h1>Start your jewellery journey.</h1>
+          <p>Register to manage your profile, save favorite pieces, and make shopping feel personal.</p>
+        </div>
+      </section>
+
+      <section class="auth-card" aria-labelledby="register-title">
+        <p class="eyebrow">Register</p>
+        <h2 id="register-title">Create your account</h2>
+
+        <form class="auth-form" method="POST">
+          {% csrf_token %}
+
+          {% for field in form %}
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+              <small>{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+              <p class="form-error">{{ error }}</p>
+            {% endfor %}
+          {% endfor %}
+
+          {% for error in form.non_field_errors %}
+            <p class="form-alert">{{ error }}</p>
+          {% endfor %}
+
+          <button class="primary-button" type="submit">Register</button>
+        </form>
+
+        <p class="auth-switch">
+          Already have an account?
+          <a href="{% url 'ecommerce:login' %}">Login here</a>
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

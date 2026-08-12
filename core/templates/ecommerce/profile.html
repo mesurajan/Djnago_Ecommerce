@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Profile | JewelLens{% endblock %}
+
+{% block content %}
+<section class="profile-page">
+  <div class="profile-hero">
+    <div class="profile-avatar" aria-hidden="true">
+      {{ request.user.username|first|upper }}
+    </div>
+    <div>
+      <p class="eyebrow">My profile</p>
+      <h1>Welcome, {{ request.user.username }}!</h1>
+      <p class="auth-copy">Your JewelLens account is ready for saved styles, carts, and orders.</p>
+    </div>
+  </div>
+
+  <div class="profile-grid">
+    <article class="profile-card">
+      <span>Username</span>
+      <strong>{{ request.user.username }}</strong>
+    </article>
+    <article class="profile-card">
+      <span>Email</span>
+      <strong>{{ request.user.email|default:"Not added yet" }}</strong>
+    </article>
+    <article class="profile-card">
+      <span>Account status</span>
+      <strong>{% if request.user.is_active %}Active{% else %}Inactive{% endif %}</strong>
+    </article>
+  </div>
+
+  <form class="profile-actions" method="post" action="{% url 'ecommerce:logout' %}">
+    {% csrf_token %}
+    <a class="secondary-button" href="{% url 'ecommerce:collection' %}">Browse collections</a>
+    <button class="primary-button" type="submit">Logout</button>
+  </form>
+</section>
+{% endblock %}

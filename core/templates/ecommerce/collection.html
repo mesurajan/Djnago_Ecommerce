@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block title %}Collections | JewelLens{% endblock %}
+{% block content %}
+<div>
+  <h1>Welcome to our collection page</h1>
+  <p>
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa eaque
+    quibusdam voluptate amet sequi minima velit odio harum optio exercitationem!
+    Minima sit voluptate totam aperiam? A repellat libero aliquid dicta.
+  </p>
+</div>
+
+<div>
+  <h1>List Of products</h1>
+  <div>
+    {% for products in products %}
+    <div>
+      <h2>{{ products.name }}</h2>
+      <p>Price: ${{ products.price }}</p>
+      <p>Description: {{ products.description }}</p>
+      <img src="{{ products.image.url }}" alt="{{ products.name }}" />
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
